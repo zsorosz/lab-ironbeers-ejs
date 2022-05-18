@@ -51,7 +51,7 @@ $ node app.js
 
 Our starter code includes the basic configuration needed to run our app. The **`/`** route is set to render the `index.ejs` file. Let's start by creating a layout.
 
-Inside of the `views` folder, create a folder called `layouts` then create a `layout.ejs` file inside it. In the bonus iteration, you can give your app some style, but for now, let's focus on the logic.
+Inside of the `views` folder, create a `layout.ejs` file. In the bonus iteration, you can give your app some style, but for now, let's focus on the logic.
 
 Remember to add the `<%- body %>` to the **main layout**.
 
