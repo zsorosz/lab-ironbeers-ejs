@@ -8,7 +8,7 @@ Sometimes you would just like to have a very descriptive list of all beers so yo
 
 "How will we get all of this information?", you might ask. Well, we will be using an npm package :package: as our data source.
 
-For this exercise, we will work with the **[PunkAPI](https://www.npmjs.com/package/punkapi-javascript-wrapper)** npm package. In the background, the package communicates with a remote _database_ that contains all of the beers. The package enables us to use its methods that can help us to retrieve beers. Each beer has some properties, and we can play around with this data to practice working with Handlebars templates, `layouts` and `partials`.
+For this exercise, we will work with the **[PunkAPI](https://www.npmjs.com/package/punkapi-javascript-wrapper)** npm package. In the background, the package communicates with a remote _database_ that contains all of the beers. The package enables us to use its methods that can help us to retrieve beers. Each beer has some properties, and we can play around with this data to practice working with EJS templates, `layouts` and `partials`.
 
 **In this lab, we can also practice reading external (PunkAPI) docs and learn how to get what we need from the database.**
 
@@ -49,11 +49,11 @@ $ node app.js
 
 ### Iteration 1: Layout barebones
 
-Our starter code includes the basic configuration needed to run our app. The **`/`** route is set to render the `index.hbs` file. Let's start by creating a layout.
+Our starter code includes the basic configuration needed to run our app. The **`/`** route is set to render the `index.ejs` file. Let's start by creating a layout.
 
-Inside of the `views` folder, create a `layout.hbs` file. In the bonus iteration, you can give your app some style, but for now, let's focus on the logic.
+Inside of the `views` folder, create a `layout.ejs` file. In the bonus iteration, you can give your app some style, but for now, let's focus on the logic.
 
-Remember to add the `{{{ body }}}` to the **main layout**.
+Remember to add the `<%- body %>` to the **main layout**.
 
 Add a navbar that includes links to 3 pages:
 
@@ -65,8 +65,8 @@ Layout done, let's move to creating these three pages.
 
 ### Iteration 2 - Home _page_
 
-- The first page should be **Home** and should be rendered on **`/`**. The file that gets rendered is `index.hbs`.
-- This file should include the _beer image_, which you can find at `/public/images`. Together with the image, `index.hbs` should have two links: `Check the Beers!` and `Check a Random Beer`. Both links should navigate to the corresponding routes (which we previously defined in our navbar as well). Later, you can style these `a` tags to make them look like buttons.
+- The first page should be **Home** and should be rendered on **`/`**. The file that gets rendered is `index.ejs`.
+- This file should include the _beer image_, which you can find at `/public/images`. Together with the image, `index.ejs` should have two links: `Check the Beers!` and `Check a Random Beer`. Both links should navigate to the corresponding routes (which we previously defined in our navbar as well). Later, you can style these `a` tags to make them look like buttons.
 
 ![image](https://user-images.githubusercontent.com/23629340/36723774-7d791ef2-1bb1-11e8-991b-39dbf4fd8a59.png)
 
@@ -77,7 +77,7 @@ The next thing we will be working on is a page where we can present all the beer
 This leads us to the conclusion that in this step, we have the two main focus areas:
 
 - the `/beers` route and
-- the `beers.hbs` view.
+- the `beers.ejs` view.
 
 #### Iteration 3.1 The `/beers` route
 
@@ -85,7 +85,7 @@ In this step, we will have a couple of micro-steps:
 
 - Create a `/beers` route inside the `app.js` file.
 - Inside the `/beers` route, call the `getBeers()` method (the **PunkAPI** provides this method, and you can find more about it [here](https://www.npmjs.com/package/punkapi-javascript-wrapper#getbeersoptions)). **Calling the `.getBeers()` method returns a promise that should be resolved with an array of 25 beers**.
-- Down the road, you should pass that array to the `beers.hbs` view.
+- Down the road, you should pass that array to the `beers.ejs` view.
 
 The example of how this method works is shown below:
 
@@ -96,11 +96,11 @@ punkAPI
   .catch(error => console.log(error));
 ```
 
-#### 3.2 The `beers.hbs` view
+#### 3.2 The `beers.ejs` view
 
-- Create a `beers.hbs` file to render every time we call this route.
+- Create a `beers.ejs` file to render every time we call this route.
 - This file should have access to the beers we get as a response from the database. Remember, you should call the `render` method after getting the _beers_ array. _Hint:_ That means inside of the function you're passing to the `then` method. :wink:
-- On the `beers.hbs` view, loop over the **array of beers** using an `{{#each}}` loop. Display an **image**, **name**, **description** and **tagline**.
+- On the `beers.ejs` view, loop over the **array of beers** using a `forEach` loop. Display an **image**, **name**, **description** and **tagline**.
 
 Now, when you click on the `Beers` link on the top navigation or on the `Check the beers` button, you should be able to see all the beers. Boom! :boom:
 
@@ -124,11 +124,11 @@ punkAPI
   .catch(error => console.log(error));
 ```
 
-- Eventually, the received beer needs to be passed to the `random-beer.hbs` file. You still don't have this file, so let's proceed to create it.
+- Eventually, the received beer needs to be passed to the `random-beer.ejs` file. You still don't have this file, so let's proceed to create it.
 
-#### 4.2 The `random-beer.hbs` view
+#### 4.2 The `random-beer.ejs` view
 
-- The `random-beer.hbs` should display the random beer that was retrieved from the database. You should display an **image**, **name**, **description**, **tagline**, **food pairing** and **brewer tips**. The following image shows how this page could look like if you give it a bit of style. However, the styling will come later, so, for now, focus on rendering all the information:
+- The `random-beer.ejs` should display the random beer that was retrieved from the database. You should display an **image**, **name**, **description**, **tagline**, **food pairing** and **brewer tips**. The following image shows how this page could look like if you give it a bit of style. However, the styling will come later, so, for now, focus on rendering all the information:
 
 ![image](https://user-images.githubusercontent.com/23629340/36724536-c5924892-1bb3-11e8-8f22-fd1f8ce316af.png)
 
@@ -161,21 +161,15 @@ As we can see, we have 4 in common properties, which means our code could be a b
 
 You should create a partial to show each beer.
 
-- First, we need to register where our `partials` will be located. So you need to add the following code to the `app.js` file:
-
-```jsx
-hbs.registerPartials(path.join(__dirname, 'views/partials'));
-```
-
-- Next, you should create a `partials` folder inside the `views`, and `beerpartial.hbs` file inside the `partials` folder (**Note**: We're not including dashes in the `hbs` partial names, since handlebars partials need to follow the same naming conventions as JavaScript variables).
-- Our `beerpartial.hbs` will display the properties that both views share: **image**, **name**, **description**, and **tagline** of the beer.
-- Now, you can go ahead and plug in this partial in the `beers.hbs` view inside the `each` loop.
+- First, you should create a `partials` folder inside the `views`, and `beer.ejs` file inside the `partials` folder.
+- Our `beer.ejs` will display the properties that both views share: **image**, **name**, **description**, and **tagline** of the beer.
+- Now, you can go ahead and plug in this partial in the `beers.ejs` view inside the `forEach` loop.
 
 After creating the partial, and looping over the array of beers, on our `/beers` route, we should have the following:
 
 ![image](https://user-images.githubusercontent.com/23629340/36724392-61fa7336-1bb3-11e8-8468-189908167e10.png)
 
-- Also, you can use it in the `random-beer.hbs` page.
+- Also, you can use it in the `random-beer.ejs` page.
 
 Our code shrunk by a lot just because we managed to create a reusable piece of code (the partial), which we can now place wherever we need to use this set of properties.
 
