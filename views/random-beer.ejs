@@ -1,15 +1,12 @@
 <div>
-  <img src="<%- randomBeer.image_url %> " alt="random-beer" />
   <div>
-    <h3><%- randomBeer.name %></h3>
-    <h4><%- randomBeer.tagline %></h4>
-    <p><%- randomBeer.description %></p>
+    <%- include("./partials/beer.ejs") %>
     <h4>Food Pairings</h4>
     <ul>
-      <% randomBeer.food_pairing.forEach(food => { %>
+      <% allBeers[0].food_pairing.forEach(food => { %>
       <li><%- food %></li>
       <% }) %>
     </ul>
-    <p><strong>Brewers Tips: </strong><%- randomBeer.brewers_tips %></p>
+    <p><strong>Brewers Tips: </strong><%- allBeers[0].brewers_tips %></p>
   </div>
 </div>
