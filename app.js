@@ -27,8 +27,8 @@ app.get('/', async (req, res) => {
 app.get('/beers', async (req, res) => {
   try {
     let allBeers = await punkAPI.getBeers();
-    // console.log(allBeers);
-    res.render('beers');
+    console.log(allBeers);
+    res.render('beers', { allBeers });
   } catch (error) {
     // console.log('Error getting the beers', error);
   }
