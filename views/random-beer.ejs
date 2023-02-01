@@ -1,12 +1,3 @@
 <div>
-  <div>
-    <%- include("./partials/beer.ejs") %>
-    <h4>Food Pairings</h4>
-    <ul>
-      <% allBeers[0].food_pairing.forEach(food => { %>
-      <li><%- food %></li>
-      <% }) %>
-    </ul>
-    <p><strong>Brewers Tips: </strong><%- allBeers[0].brewers_tips %></p>
-  </div>
+  <div><%- include("./beer-details.ejs") %></div>
 </div>
