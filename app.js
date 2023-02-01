@@ -28,6 +28,16 @@ app.get('/beers', async (req, res) => {
     // console.log('Error getting the beers', error);
   }
 });
+app.get('/beers/:id', async (req, res) => {
+  try {
+    let id = req.params.id;
+    let allBeers = await punkAPI.getBeer(id);
+    console.log(id);
+    res.render('beer-details', { allBeers });
+  } catch (error) {
+    // console.log('Error getting the beers', error);
+  }
+});
 app.get('/random-beer', async (req, res) => {
   try {
     let randomBeer = await punkAPI.getRandom();
